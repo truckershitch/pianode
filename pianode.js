@@ -19,9 +19,9 @@ function Pianode(userOptions) {
     pianode.stations = {};
 
     // Check if userOptions hold all neccessary fields
-    if (!(userOptions.password && userOptions.email)) {
-        throw 'Pianode error: You have to specify pandora.com credentials.';
-    }
+    //if (!(userOptions.password && userOptions.email)) {
+    //    throw 'Pianode error: You have to specify pandora.com credentials.';
+    //}
 
     var options = {
         station: 'Q',
@@ -179,6 +179,15 @@ function Pianode(userOptions) {
             },
             grabInfo: function () {
                 return pianode.currentInfo;
+            },
+            play: function () {
+                return pianode.play;
+            },
+            pause: function () {
+                return pianode.pause;
+            },
+            next: function () {
+                return pianode.next;
             },
             setState: setState
         });
