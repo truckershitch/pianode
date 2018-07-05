@@ -36,7 +36,7 @@
 
 # Misc
 audio_format = mp3
-audio_quality = normal
+audio_quality = high
 #autostart_station = 334061779151755777
 # Found after inital selection on radio station
 #tls_fingerprint = 

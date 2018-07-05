@@ -1,10 +1,9 @@
 #!/bin/bash
 
 fold=$(dirname $0)
-#interpreter="$fold/../pianobar/interpreter.sock"
-#need a relative path below
-#interpreter="$fold/node_modules/pianode/pianobar/interpreter.sock"
-interpreter="/data/plugins/music_service/pandora/node_modules/pianode/pianobar/interpreter.sock"
+interpreter="$fold/../pianobar/interpreter.sock"
+#fixed path below
+#interpreter="/data/plugins/music_service/pandora/node_modules/pianode/pianobar/interpreter.sock"
 while read L; do
         k="`echo "$L" | cut -d '=' -f 1`"
         v="`echo "$L" | cut -d '=' -f 2`"
