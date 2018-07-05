@@ -18,11 +18,6 @@ function Pianode(userOptions) {
     pianode.currentInfo = {};
     pianode.stations = {};
 
-    // Check if userOptions hold all neccessary fields
-    //if (!(userOptions.password && userOptions.email)) {
-    //    throw 'Pianode error: You have to specify pandora.com credentials.';
-    //}
-
     var options = {
         station: 'Q',
         verbose: true,
@@ -145,6 +140,11 @@ function Pianode(userOptions) {
 
 
     pianode.start = function () {
+
+        // Check if userOptions hold all neccessary fields
+        if (!(options.password && options.email)) {
+            throw 'Pianode error: You have to specify pandora.com credentials.';
+        }
 
         pianobar = spawn(pianobarPath, [], {
             stdio: 'pipe',
