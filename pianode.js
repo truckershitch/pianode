@@ -19,7 +19,7 @@ function Pianode(userOptions) {
     pianode.stations = {};
 
     var options = {
-        station: 'Q',
+        station: '0',
         verbose: true,
         debug: true,
         logErrors: true,
@@ -138,6 +138,11 @@ function Pianode(userOptions) {
     pianode.changeStation = functions.changeStation;
     pianode.getStationList = functions.getStationList;
 
+    pianode.setOptions = function (newOptions) {
+        if (newOptions) {
+            options = _.extend(options, newOptions);
+        }
+    }
 
     pianode.start = function () {
 
@@ -167,7 +172,10 @@ function Pianode(userOptions) {
             },
             writeToFifo: writeToFifo,
             setStatus: setStatus,
-            getStatus: getStatus,
+            //getStatus: getStatus,
+            getStatus: function () {
+                return status;
+            },
             grabStationList: function () {
                 return pianode.stations;
             },
@@ -255,9 +263,9 @@ function Pianode(userOptions) {
 
         pianode.socket.close();
 
-        setTimeout(function () {
-            process.exit();
-        }, 300);
+        //setTimeout(function () {
+        //    process.exit();
+        //}, 300);
     };
 
     process.on('exit', pianode.stop);
