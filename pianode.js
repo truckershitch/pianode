@@ -137,6 +137,7 @@ function Pianode(userOptions) {
     pianode.addMusicToStation = functions.addMusicToStation;
     pianode.changeStation = functions.changeStation;
     pianode.getStationList = functions.getStationList;
+    pianode.makeChoice = functions.makeChoice;
 
     pianode.setOptions = function (newOptions) {
         if (newOptions) {
@@ -158,61 +159,29 @@ function Pianode(userOptions) {
             })
         });
 
-        pianode.buffer = ""; // read buffer
 
         functions.setUp({
-            read: function () {
-                var readout = pianode.buffer;
-                pianode.buffer = ""; // burn after reading
-                return readout;
-            },
             write: function (data) {
                 pianobar.stdin.write(data + '\n');
                 //pianobar.stdin.end();
             },
             writeToFifo: writeToFifo,
             setStatus: setStatus,
-            //getStatus: getStatus,
             getStatus: function () {
                 return status;
             },
             grabStationList: function () {
                 return pianode.stations;
             },
-            grabStation: function () {
-                return pianode.station;
-            },
-            grabSong: function () {
-                return pianode.song;
-            },
-            grabInfo: function () {
-                return pianode.currentInfo;
-            },
-            play: function () {
-                return pianode.play;
-            },
-            pause: function () {
-                return pianode.pause;
-            },
-            next: function () {
-                return pianode.next;
-            },
             setState: setState
         });
 
         pianobar.stdout.on('data', function (data) {
             log(data.toString());
-            pianode.buffer = pianode.buffer + data.toString();
-            //log(pianode.buffer);
 
             // Call routes
             processIo({
                 data: data.toString(),
-                read: function () {
-                    var readout = pianode.buffer;
-                    pianode.buffer = "";
-                    return readout;
-                },
                 write: function (data) {
                     pianobar.stdin.write(data + '\n');
                     //pianobar.stdin.end();
